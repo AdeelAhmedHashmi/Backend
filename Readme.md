@@ -1,0 +1,1 @@
+in this lecture i will learn how to make folder structure in production level application.
