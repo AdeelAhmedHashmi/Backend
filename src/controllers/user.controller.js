@@ -44,7 +44,7 @@ const registerUser = asyncHandler( async (req, res)=>{
     if(
         req.files &&
         Array.isArray(req.files.coverImage) &&
-        req.files.coverImage.lenght > 0
+        req.files.coverImage.length > 0
     ){
         coverImageLocalPath = req.files?.coverImage[0]?.path;
     }
@@ -53,7 +53,7 @@ const registerUser = asyncHandler( async (req, res)=>{
         throw new ApiError(400, "[ApiError (user.controller)->] Avatar file is required! avatarLocalPath is not found!")
     }
 
-    // // upload this files on cloudinary
+    // upload this files on cloudinary
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 
@@ -67,17 +67,16 @@ const registerUser = asyncHandler( async (req, res)=>{
 
     const user = await User.create({
         fullname,
-        // avatar: avatar.url || avatarLocalPath,
-        avatar: avatarLocalPath,
-        // coverImage: coverImage?.url || "",
-        coverImage: coverImageLocalPath || "",
+        avatar: avatar.url,
+        // avatar: avatarLocalPath,
+        coverImage: coverImage?.url || "",
+        // coverImage: coverImageLocalPath || "",
         email,
         username: username.toLowerCase(),
         password
     })
 
     console.log(`[Log (user.controller)->]  `, User)
-
 
     const createdUser = await User.findById(user._id).select(
         "-password -refreshToken"
@@ -90,6 +89,21 @@ const registerUser = asyncHandler( async (req, res)=>{
     return res.status(201).json(
         new ApiResponse(200, createdUser, "[ApiResponse (user.controller)->]  User Registered Successfully!")
     )
-} )
+})
 
-export { registerUser }
+const loginUser = asyncHandler(async (req, res) => {
+    // Get data from req.body
+    // login with username || email  
+    // find the user
+    // check password
+    // generate access and refresh token 
+    // send coolkies
+
+    const [email, username, password] = req.body
+    
+})
+
+export {
+     registerUser,
+     loginUser
+}
