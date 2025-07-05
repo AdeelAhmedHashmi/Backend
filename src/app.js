@@ -21,4 +21,9 @@ import userRouter from "./routes/user.routes.js"
 // routes decalration
 app.use( "/api/v1/users", userRouter )
 
+app.get('/',(req, res)=>{
+    res.json({
+        message: "hi"
+    })
+})
 export default app;

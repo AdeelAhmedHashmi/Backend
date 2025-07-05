@@ -1,0 +1,31 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+form{
+  border: 1px solid black;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+
+}
+form div{
+  border: 1px solid red;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+}
+form div input:not(.btn){
+  padding: 8px;
+  width: min(60vw,300px);
+}
+.btn{
+  padding: 7px;
+}
